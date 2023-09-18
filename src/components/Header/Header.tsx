@@ -1,11 +1,12 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import logoTaugor from '../../assets/marca-taugor.png';
+import Image from "next/image";
 
 export default function Header() {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar>
+        <AppBar color="inherit">
           <Toolbar>
             <IconButton
               size="large"
@@ -14,7 +15,10 @@ export default function Header() {
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              <MenuIcon />
+              <Image
+                src={logoTaugor}
+                alt="Logo Taugor"
+              />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Informação de contato
