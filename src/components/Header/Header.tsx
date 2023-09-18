@@ -6,8 +6,8 @@ import HomeIcon from '@mui/icons-material/Home';
 export default function Header() {
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar color="inherit">
+      <Box marginBottom={3} sx={{ flexGrow: 1 }}>
+        <AppBar color="inherit" position="static">
           <Toolbar>
             <IconButton
               size="large"
