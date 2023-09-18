@@ -1,6 +1,7 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import logoTaugor from '../../assets/marca-taugor.png';
 import Image from "next/image";
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Header() {
   return (
@@ -23,7 +24,9 @@ export default function Header() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Informação de contato
             </Typography>
-            <Button color="inherit">Home</Button>
+            <Button>
+              <HomeIcon />
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
