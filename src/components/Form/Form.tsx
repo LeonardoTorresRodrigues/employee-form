@@ -1,5 +1,8 @@
+'use client'
+
 import React from 'react';
 import { TextField, Typography, Box, MenuItem, } from '@mui/material';
+import { MuiTelInput } from 'mui-tel-input';
 
 const sexo = [
   {
@@ -17,7 +20,11 @@ const sexo = [
 ]
 
 export default function Form() {
+  const [phone, setPhone] = React.useState('');
 
+  const handleChange = (newPhone: string) => {
+    setPhone(newPhone)
+  }
   return (
     <section>
       <Box
@@ -34,11 +41,11 @@ export default function Form() {
         </Typography>
         <form noValidate autoComplete='off'>
           <TextField
-            fullWidth
-            required
-            defaultValue=""
             label="Nome"
             helperText="ex. Tiago"
+            defaultValue=""
+            fullWidth
+            required
           />
           <TextField
             fullWidth
@@ -67,12 +74,15 @@ export default function Form() {
             defaultValue=""
             helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
           />
-          <TextField
+          <MuiTelInput
+            defaultCountry='BR'
+            value={phone}
+            onChange={handleChange}
             required
-            type='number'
             label="Telefone"
-            defaultValue=""
             helperText="(xx) xxxxxxxxx"
+            size='small'
+            variant='outlined'
           />
         </form>
       </Box>
