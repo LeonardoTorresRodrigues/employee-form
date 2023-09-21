@@ -3,6 +3,10 @@
 import React from 'react';
 import { TextField, Typography, Box, MenuItem, } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input';
+//import { DatePicker } from '@mui/x-date-pickers';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const sexo = [
   {
@@ -36,7 +40,11 @@ export default function Form() {
           mx: 'auto'
         }}
       >
-        <Typography gutterBottom variant='h6' align='justify'>
+        <Typography
+          gutterBottom
+          variant='h6'
+          align='justify'
+        >
           Digite abaixo as informações do funcionário
         </Typography>
         <form noValidate autoComplete='off'>
@@ -46,6 +54,7 @@ export default function Form() {
             defaultValue=""
             fullWidth
             required
+            variant='filled'
           />
           <TextField
             fullWidth
@@ -53,6 +62,7 @@ export default function Form() {
             defaultValue=""
             label="Sobrenome"
             helperText="ex. Souza"
+            variant='filled'
           />
           <TextField
             label="Sexo"
@@ -60,6 +70,8 @@ export default function Form() {
             select
             defaultValue=""
             helperText="Selecione o sexo do funcionário"
+            variant='filled'
+            size='small'
           >
             {sexo.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -67,12 +79,23 @@ export default function Form() {
               </MenuItem>
             ))}
           </TextField>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateField
+              label="Data de nascimento"
+              helperText="01-01-2000"
+              format='DD-MM-YYYY'
+              size='small'
+              variant='filled'
+              required
+            />
+          </LocalizationProvider>
           <TextField
             required
             fullWidth
             label="Endereço"
             defaultValue=""
             helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
+            variant='filled'
           />
           <MuiTelInput
             defaultCountry='BR'
@@ -82,8 +105,9 @@ export default function Form() {
             label="Telefone"
             helperText="(xx) xxxxxxxxx"
             size='small'
-            variant='outlined'
+            variant='filled'
           />
+
         </form>
       </Box>
     </section>
