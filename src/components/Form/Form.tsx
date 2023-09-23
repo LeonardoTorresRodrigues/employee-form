@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { TextField, Typography, Box, MenuItem, Avatar, Stack, Button, } from '@mui/material';
+import { TextField, Typography, Box, MenuItem, Avatar, Stack } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input';
 //import { DatePicker } from '@mui/x-date-pickers';
 import { DateField } from '@mui/x-date-pickers/DateField';
@@ -107,7 +107,7 @@ export default function Form() {
             helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
             variant='filled'
           />
-          <Stack direction="row" spacing={"auto"} flexWrap={'wrap'} alignItems={'center'}>
+          <Stack direction="row" spacing={'auto'} flexWrap={'wrap'}>
             <MuiTelInput
               defaultCountry='BR'
               value={phone}
