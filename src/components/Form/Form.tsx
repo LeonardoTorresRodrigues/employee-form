@@ -7,10 +7,8 @@ import { MuiTelInput } from 'mui-tel-input';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import Input from '@mui/material/Input';
-
+//import Input from '@mui/material/Input';
+import ProfilePictureButton from '../ProfilePictureButton';
 
 const sexo = [
   {
@@ -25,72 +23,20 @@ const sexo = [
     value: 'outro',
     label: 'Outro'
   }
-]
-
-// const ProfilePic = () => {
-//   const [pic, setPic] = useState("")
-//   return (
-//     <Stack>
-//       <TextField
-//         type='file'
-
-//       />
-//     </Stack>
-//   )
-// }
-
-export interface SimpleDialogProps {
-  open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
-};
-
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Selecione uma foto</DialogTitle>
-      <Input
-        type='string'
-        placeholder=" Cole aqui o link"
-      />
-      <Input
-        type='file'
-      />
-    </Dialog>
-  );
-}
+];
 
 export default function Form() {
   const [phone, setPhone] = React.useState('');
 
   const handleChange = (newPhone: string) => {
     setPhone(newPhone)
-  }
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
   };
 
-  const handleClose = (value: string) => {
-    setOpen(false);
-  }
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
 
-  // const [pic, setPic] = React.useState('');
-  // const handleProfilePic = (newProfilePic: string) => {
-  //   setPic(newProfilePic)
-  // }
+  const handleUpload = (file: File) => {
+    setProfilePicture(file);
+  };
 
   return (
     <Box
@@ -161,7 +107,7 @@ export default function Form() {
             helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
             variant='filled'
           />
-          <Stack direction="row" spacing={"auto"}>
+          <Stack direction="row" spacing={"auto"} flexWrap={'wrap'} alignItems={'center'}>
             <MuiTelInput
               defaultCountry='BR'
               value={phone}
@@ -172,24 +118,19 @@ export default function Form() {
               size='small'
               variant='filled'
             />
-            <Stack>
-              <Button variant='outlined' onClick={handleClickOpen}>
-                Adicione uma foto
-              </Button>
-              <SimpleDialog
-                selectedValue=''
-                open={open}
-                onClose={handleClose}
+            {profilePicture && (
+              <Avatar
+                alt='Foto de Perfil'
+                src={URL.createObjectURL(profilePicture)}
+                className='MuiAvatar-root'
+                sx={{
+                  width: { xs: 70, sm: 120 },
+                  height: { xs: 70, sm: 120 },
+                }}
+                variant='rounded'
               />
-              {/* <Button variant='outlined'>
-                Adicionar
-              </Button> */}
-            </Stack>
-            <Avatar
-              alt='profile avatar'
-              src=""
-              variant='rounded'
-            />
+            )}
+            <ProfilePictureButton onUpload={handleUpload} />
           </Stack>
         </form>
       </Stack>
