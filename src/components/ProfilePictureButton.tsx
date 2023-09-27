@@ -26,11 +26,12 @@ const ProfilePictureButton: React.FC<ProfilePictureButtonProps> = ({ onUpload })
   return (
     <Stack>
       <Button
-        variant='contained'
+        variant='outlined'
         size='small'
         color='primary'
         startIcon={<AddPhotoAlternateIcon />}
         onClick={handleButtonClick}
+        aria-label='adicionar foto de perfil'
       >
         Adicionar Foto de Perfil
       </Button>
