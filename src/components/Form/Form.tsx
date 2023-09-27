@@ -57,7 +57,12 @@ export default function Form() {
               helperText="ex. Souza"
               variant='filled'
             />
-            <Stack direction="row" spacing={"auto"} flexWrap={'wrap'}>
+            <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={"auto"}
+            flexWrap={'wrap'} sx={{
+
+            }}>
               <TextField
                 label="Sexo"
                 required
