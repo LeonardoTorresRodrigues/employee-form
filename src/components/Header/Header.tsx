@@ -11,50 +11,53 @@ export default function Header() {
   const theme = useTheme();
 
   return (
-    <div>
-      <Box marginBottom={3} sx={{ flexGrow: 1 }}>
-        <AppBar color="inherit" position="static">
-          <Toolbar>
-            <Hidden smDown>
-              <Image
-                src={logoTaugor}
-                alt="Logo Taugor"
-              />
-            </Hidden>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                [theme.breakpoints.down('sm')]: {
-                  fontSize: '1.5rem',
-                  flexWrap: "wrap",
-                },
-              }}
-            >
-              Informação de contato
-            </Typography>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{
-                [theme.breakpoints.down('sm')]: {
-                  margin: 0,
-                },
-                [theme.breakpoints.up('md')]: {
-                  margin: 2,
-                },
-              }}
-            >
-              <HomeIcon
-                color="primary"
-              />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </div>
+    <Box marginBottom={3} sx={{ flexGrow: 1 }}>
+      <AppBar color="inherit" position="static">
+        <Toolbar>
+          {/* <Hidden smDown>
+            </Hidden> */}
+          <Image
+            src={logoTaugor}
+            alt="Logo Taugor"
+            sizes="100%"
+            style={{
+              width: 'auto',
+              height: 'auto',
+            }}
+          />
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '1rem',
+                flexWrap: "wrap",
+              },
+            }}
+          >
+            Informação de contato
+          </Typography>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{
+              [theme.breakpoints.down('sm')]: {
+                margin: 0,
+              },
+              [theme.breakpoints.up('md')]: {
+                margin: 2,
+              },
+            }}
+          >
+            <HomeIcon
+              color="primary"
+            />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
