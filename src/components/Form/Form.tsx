@@ -58,11 +58,9 @@ export default function Form() {
               variant='filled'
             />
             <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={"auto"}
-            flexWrap={'wrap'} sx={{
-
-            }}>
+              direction={{ xs: 'column', lg: 'row' }}
+              spacing={"auto"}
+            >
               <TextField
                 label="Sexo"
                 required
@@ -97,7 +95,12 @@ export default function Form() {
               helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
               variant='filled'
             />
-            <Stack direction="row" spacing={'auto'} flexWrap={'wrap'}>
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              alignItems={{ xs: 'center', sm: 'flex-start' }}
+              justifyContent={{ xs: 'center', sm: 'flex-start' }}
+              spacing={{ xs: 2, sm: 4 }}
+            >
               <MuiTelInput
                 defaultCountry='BR'
                 value={phone}
@@ -105,7 +108,7 @@ export default function Form() {
                 required
                 label="Telefone"
                 helperText="(xx) xxxxxxxxx"
-                size='small'
+                fullWidth
                 variant='filled'
               />
               {profilePicture && (
