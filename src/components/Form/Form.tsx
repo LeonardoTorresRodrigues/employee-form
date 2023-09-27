@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react';
-import { TextField, MenuItem, Avatar, Stack, Grid, Paper } from '@mui/material';
+import { TextField, MenuItem, Avatar, Stack, Grid, Paper, Button } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ProfilePictureButton from '../ProfilePictureButton';
+import SendIcon from '@mui/icons-material/Send';
 
 const sexo = [
   {
@@ -124,6 +125,18 @@ export default function Form() {
                 />
               )}
               <ProfilePictureButton onUpload={handleUpload} />
+            </Stack>
+            <Stack marginTop={2}>
+              <Button
+                color='primary'
+                fullWidth
+                size='large'
+                variant='contained'
+                aria-label='cadastrar funcionário'
+                endIcon={<SendIcon />}
+              >
+                Cadastrar Funcionário
+              </Button>
             </Stack>
           </form>
         </Paper>
