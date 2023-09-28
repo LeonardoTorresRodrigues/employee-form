@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react';
-import { TextField, MenuItem, Avatar, Stack, Grid, Paper, Button } from '@mui/material';
+import { TextField, MenuItem, Avatar, Stack, Grid, Paper, Button, Typography } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import ProfilePictureButton from '../ProfilePictureButton';
+import ProfilePictureButton from './ProfilePictureButton';
+import SalaryInput from './SalaryInput';
 import SendIcon from '@mui/icons-material/Send';
 
 const sexo = [
@@ -35,6 +36,12 @@ export default function Form() {
 
   const handleUpload = (file: File) => {
     setProfilePicture(file);
+  };
+
+  const [salary, setSalary] = useState<number>(0);
+
+  const handleSalaryChange = (newSalary: number) => {
+    setSalary(newSalary);
   };
 
   return (
@@ -125,6 +132,32 @@ export default function Form() {
                 />
               )}
               <ProfilePictureButton onUpload={handleUpload} />
+            </Stack>
+            <Stack spacing={2}>
+              <Typography>Informações do Funcionário</Typography>
+              <TextField
+                label="Cargo"
+                defaultValue=""
+                fullWidth
+                required
+                variant='filled'
+              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateField
+                  label="Data de Admissão"
+                  format='DD-MM-YYYY'
+                  variant='filled'
+                  required
+                />
+              </LocalizationProvider>
+              <TextField
+                label="Setor"
+                defaultValue=""
+                fullWidth
+                required
+                variant='filled'
+              />
+              <SalaryInput value={salary} onChange={handleSalaryChange} />
             </Stack>
             <Stack marginTop={2}>
               <Button
