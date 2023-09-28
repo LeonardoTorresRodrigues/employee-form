@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ProfilePictureButton from './ProfilePictureButton';
 import SalaryInput from './SalaryInput';
 import SendIcon from '@mui/icons-material/Send';
+import { useTheme } from '@mui/material/styles';
 
 const sexo = [
   {
@@ -26,6 +27,8 @@ const sexo = [
 ];
 
 export default function Form() {
+  const theme = useTheme();
+
   const [phone, setPhone] = React.useState('');
 
   const handleChange = (newPhone: string) => {
@@ -49,6 +52,20 @@ export default function Form() {
       <Grid item xs={12} sm={8} md={6}>
         <Paper elevation={3} style={{ padding: '20px' }}>
           <form noValidate autoComplete='off'>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                marginBottom: 2,
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '1rem',
+                  flexWrap: "wrap",
+                },
+              }}
+            >
+              Informações de Contato
+            </Typography>
             <TextField
               label="Nome"
               helperText="ex. Tiago"
@@ -108,6 +125,7 @@ export default function Form() {
               alignItems={{ xs: 'center', sm: 'flex-start' }}
               justifyContent={{ xs: 'center', sm: 'flex-start' }}
               spacing={{ xs: 2, sm: 4 }}
+              marginBottom={4}
             >
               <MuiTelInput
                 defaultCountry='BR'
@@ -134,7 +152,19 @@ export default function Form() {
               <ProfilePictureButton onUpload={handleUpload} />
             </Stack>
             <Stack spacing={2}>
-              <Typography>Informações do Funcionário</Typography>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  flexGrow: 1,
+                  [theme.breakpoints.down('sm')]: {
+                    fontSize: '1rem',
+                    flexWrap: "wrap",
+                  },
+                }}
+              >
+                Informações do Funcionário
+              </Typography>
               <TextField
                 label="Cargo"
                 defaultValue=""

@@ -23,19 +23,6 @@ export default function Header() {
               height: 'auto',
             }}
           />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '1rem',
-                flexWrap: "wrap",
-              },
-            }}
-          >
-            Informação de contato
-          </Typography>
           <IconButton
             size="large"
             edge="start"
