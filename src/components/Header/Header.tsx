@@ -14,8 +14,6 @@ export default function Header() {
     <Box marginBottom={3} sx={{ flexGrow: 1 }}>
       <AppBar color="inherit" position="static">
         <Toolbar>
-          {/* <Hidden smDown>
-            </Hidden> */}
           <Image
             src={logoTaugor}
             alt="Logo Taugor"
