@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <Box marginBottom={3} sx={{ flexGrow: 1 }}>
       <AppBar color="inherit" position="static">
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Image
             src={logoTaugor}
             alt="Logo Taugor"
