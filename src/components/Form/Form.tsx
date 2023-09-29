@@ -1,15 +1,15 @@
 'use client'
 
 import React, { useState } from 'react';
-import { TextField, MenuItem, Avatar, Stack, Grid, Paper, Button, Typography } from '@mui/material';
-import { MuiTelInput } from 'mui-tel-input';
+import { TextField, MenuItem, Stack, Grid, Paper, Button, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import { useTheme } from '@mui/material/styles';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import ProfilePictureButton from './ProfilePictureButton';
+import ProfilePicture from './ProfilePicture';
 import SalaryInput from './SalaryInput';
-import SendIcon from '@mui/icons-material/Send';
-import { useTheme } from '@mui/material/styles';
+import PhoneNumber from './PhoneNumber';
 
 const sexo = [
   {
@@ -28,18 +28,6 @@ const sexo = [
 
 export default function Form() {
   const theme = useTheme();
-
-  const [phone, setPhone] = React.useState('');
-
-  const handleChange = (newPhone: string) => {
-    setPhone(newPhone)
-  };
-
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
-
-  const handleUpload = (file: File) => {
-    setProfilePicture(file);
-  };
 
   const [salary, setSalary] = useState<number>(0);
 
@@ -104,7 +92,7 @@ export default function Form() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateField
                   label="Data de nascimento"
-                  helperText="01-01-2000"
+                  helperText="DD-MM-AAAA"
                   format='DD-MM-YYYY'
                   size='medium'
                   variant='filled'
@@ -127,29 +115,8 @@ export default function Form() {
               spacing={{ xs: 2, sm: 4 }}
               marginBottom={4}
             >
-              <MuiTelInput
-                defaultCountry='BR'
-                value={phone}
-                onChange={handleChange}
-                required
-                label="Telefone"
-                helperText="(xx) xxxxxxxxx"
-                fullWidth
-                variant='filled'
-              />
-              {profilePicture && (
-                <Avatar
-                  alt='Foto de Perfil'
-                  src={URL.createObjectURL(profilePicture)}
-                  className='MuiAvatar-root'
-                  sx={{
-                    width: { xs: 70, sm: 120 },
-                    height: { xs: 70, sm: 120 },
-                  }}
-                  variant='rounded'
-                />
-              )}
-              <ProfilePictureButton onUpload={handleUpload} />
+              <PhoneNumber />
+              <ProfilePicture />
             </Stack>
             <Stack spacing={2}>
               <Typography
@@ -174,7 +141,8 @@ export default function Form() {
               />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateField
-                  label="Data de Admissão"
+                  label='Data de Admissão'
+                  helperText='DD-MM-AAAA'
                   format='DD-MM-YYYY'
                   variant='filled'
                   required
