@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { TextField, MenuItem, Stack, Grid, Paper, Button, Typography } from '@mui/material';
+import { TextField, Stack, Grid, Paper, Button, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/material/styles';
 import { DateField } from '@mui/x-date-pickers/DateField';
@@ -11,24 +11,21 @@ import ProfilePicture from './ProfilePicture';
 import SalaryInput from './SalaryInput';
 import PhoneNumber from './PhoneNumber';
 import NameForm from './NameForm';
-
-const sexo = [
-	{
-		value: 'masculino',
-		label: 'Masculino'
-	},
-	{
-		value: 'feminino',
-		label: 'Feminino'
-	},
-	{
-		value: 'outro',
-		label: 'Outro'
-	}
-];
+import GenderForm from './GenderForm';
 
 export default function Form() {
 	const theme = useTheme();
+
+	const [gender, setGender] = useState<string>('');
+	const [otherGenderValue, setOtherGenderValue] = useState<string>('');
+
+	const handleOtherGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+
+		if (/^[a-zA-ZÀ-ÿ\s]*$/.test(inputValue) && inputValue.length <= 25) {
+			setOtherGenderValue(inputValue);
+		}
+	};
 
 	const [salary, setSalary] = useState<number>(0);
 
@@ -60,21 +57,20 @@ export default function Form() {
 							direction={{ xs: 'column', lg: 'row' }}
 							spacing={'auto'}
 						>
-							<TextField
-								label="Sexo"
-								required
-								select
-								defaultValue=""
-								helperText="Selecione o sexo do funcionário"
-								variant='filled'
-								size='medium'
-							>
-								{sexo.map((option) => (
-									<MenuItem key={option.value} value={option.value}>
-										{option.label}
-									</MenuItem>
-								))}
-							</TextField>
+							<GenderForm
+								value={gender}
+								onChange={setGender}
+							/>
+							{gender === 'outro' && (
+								<TextField
+									required
+									label='Escreva aqui o gênero'
+									value={otherGenderValue}
+									onChange={handleOtherGenderChange}
+									size='medium'
+									variant='filled'
+								/>
+							)}
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<DateField
 									label="Data de nascimento"
