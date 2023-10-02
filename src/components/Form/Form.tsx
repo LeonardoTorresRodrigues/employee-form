@@ -4,14 +4,12 @@ import { useState } from 'react';
 import { TextField, Stack, Grid, Paper, Button, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/material/styles';
-import { DateField } from '@mui/x-date-pickers/DateField';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ProfilePicture from './ProfilePicture';
 import SalaryInput from './SalaryInput';
 import PhoneNumber from './PhoneNumber';
 import NameForm from './NameForm';
 import GenderForm from './GenderForm';
+import DatePickForm from './DatePickerForm';
 
 export default function Form() {
 	const theme = useTheme();
@@ -27,6 +25,16 @@ export default function Form() {
 		}
 	};
 
+	const [birthday, setBirthday] = useState<Date | null>(null);
+	const [admissionDate, setAdmissionDate] = useState<Date | null>(null);
+
+	const handleBirthdayChange = (date: Date | null) => {
+		setBirthday(date);
+	};
+
+	const handleAdmissionDateChange = (date: Date | null) => {
+		setAdmissionDate(date);
+	};
 	const [salary, setSalary] = useState<number>(0);
 
 	const handleSalaryChange = (newSalary: number) => {
@@ -71,16 +79,12 @@ export default function Form() {
 									variant='filled'
 								/>
 							)}
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								<DateField
-									label="Data de nascimento"
-									helperText="DD-MM-AAAA"
-									format='DD-MM-YYYY'
-									size='medium'
-									variant='filled'
-									required
-								/>
-							</LocalizationProvider>
+							<DatePickForm
+								label='Data de Nascimento'
+								helperText='DD-MM-AAAA'
+								value={birthday}
+								onChange={handleBirthdayChange}
+							/>
 						</Stack>
 						<TextField
 							required
@@ -121,15 +125,12 @@ export default function Form() {
 								required
 								variant='filled'
 							/>
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								<DateField
-									label='Data de Admissão'
-									helperText='DD-MM-AAAA'
-									format='DD-MM-YYYY'
-									variant='filled'
-									required
-								/>
-							</LocalizationProvider>
+							<DatePickForm
+								label='Data de Admissão'
+								helperText='DD-MM-AAAA'
+								value={admissionDate}
+								onChange={handleAdmissionDateChange}
+							/>
 							<TextField
 								label="Setor"
 								defaultValue=""
