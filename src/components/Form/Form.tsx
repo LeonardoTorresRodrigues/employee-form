@@ -10,6 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ProfilePicture from './ProfilePicture';
 import SalaryInput from './SalaryInput';
 import PhoneNumber from './PhoneNumber';
+import NameForm from './NameForm';
 
 const sexo = [
 	{
@@ -52,24 +53,9 @@ export default function Form() {
 								},
 							}}
 						>
-              Informações de Contato
+							Informações de Contato
 						</Typography>
-						<TextField
-							label="Nome"
-							helperText="ex. Tiago"
-							defaultValue=""
-							fullWidth
-							required
-							variant='filled'
-						/>
-						<TextField
-							fullWidth
-							required
-							defaultValue=""
-							label="Sobrenome"
-							helperText="ex. Souza"
-							variant='filled'
-						/>
+						<NameForm />
 						<Stack
 							direction={{ xs: 'column', lg: 'row' }}
 							spacing={'auto'}
@@ -130,7 +116,7 @@ export default function Form() {
 									},
 								}}
 							>
-                Informações do Funcionário
+								Informações do Funcionário
 							</Typography>
 							<TextField
 								label="Cargo"
@@ -166,7 +152,7 @@ export default function Form() {
 								aria-label='cadastrar funcionário'
 								endIcon={<SendIcon />}
 							>
-                Cadastrar Funcionário
+								Cadastrar Funcionário
 							</Button>
 						</Stack>
 					</form>
