@@ -10,7 +10,7 @@ import PhoneNumber from './PhoneNumber';
 import NameForm from './NameForm';
 import GenderForm from './GenderForm';
 import DatePickForm from './DatePickerForm';
-import PositionForm from './PositionForm';
+import InputWithValidationForm from './InputWithValidationForm';
 
 export default function Form() {
 	const theme = useTheme();
@@ -119,19 +119,17 @@ export default function Form() {
 							>
 								Informações do Funcionário
 							</Typography>
-							<PositionForm />
+							<InputWithValidationForm
+								label='Cargo'
+							/>
 							<DatePickForm
 								label='Data de Admissão'
 								helperText='DD-MM-AAAA'
 								value={admissionDate}
 								onChange={handleAdmissionDateChange}
 							/>
-							<TextField
-								label="Setor"
-								defaultValue=""
-								fullWidth
-								required
-								variant='filled'
+							<InputWithValidationForm
+								label='Setor'
 							/>
 							<SalaryInput value={salary} onChange={handleSalaryChange} />
 						</Stack>
