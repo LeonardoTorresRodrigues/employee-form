@@ -10,6 +10,7 @@ import PhoneNumber from './PhoneNumber';
 import NameForm from './NameForm';
 import GenderForm from './GenderForm';
 import DatePickForm from './DatePickerForm';
+import PositionForm from './PositionForm';
 
 export default function Form() {
 	const theme = useTheme();
@@ -118,13 +119,7 @@ export default function Form() {
 							>
 								Informações do Funcionário
 							</Typography>
-							<TextField
-								label="Cargo"
-								defaultValue=""
-								fullWidth
-								required
-								variant='filled'
-							/>
+							<PositionForm />
 							<DatePickForm
 								label='Data de Admissão'
 								helperText='DD-MM-AAAA'
