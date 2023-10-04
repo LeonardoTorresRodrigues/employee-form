@@ -11,10 +11,12 @@ import NameForm from './NameForm';
 import GenderForm from './GenderForm';
 import DatePickForm from './DatePickerForm';
 import InputWithValidationForm from './InputWithValidationForm';
+import AddressFieldForm from './AddressFieldForm';
 
 export default function Form() {
 	const theme = useTheme();
 
+	// gender component
 	const [gender, setGender] = useState<string>('');
 	const [otherGenderValue, setOtherGenderValue] = useState<string>('');
 
@@ -26,6 +28,7 @@ export default function Form() {
 		}
 	};
 
+	// date component
 	const [birthday, setBirthday] = useState<Date | null>(null);
 	const [admissionDate, setAdmissionDate] = useState<Date | null>(null);
 
@@ -36,10 +39,18 @@ export default function Form() {
 	const handleAdmissionDateChange = (date: Date | null) => {
 		setAdmissionDate(date);
 	};
+
+	// salary component
 	const [salary, setSalary] = useState<number>(0);
 
 	const handleSalaryChange = (newSalary: number) => {
 		setSalary(newSalary);
+	};
+
+	// address component
+	const validateAddress = (address: string) => {
+		const addressRegex = /^[A-Za-z0-9\s.,#-]+$/;
+		return addressRegex.test(address);
 	};
 
 	return (
@@ -87,13 +98,8 @@ export default function Form() {
 								onChange={handleBirthdayChange}
 							/>
 						</Stack>
-						<TextField
-							required
-							fullWidth
-							label="Endereço"
-							defaultValue=""
-							helperText="ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001"
-							variant='filled'
+						<AddressFieldForm
+							validateAddress={validateAddress}
 						/>
 						<Stack
 							direction={{ xs: 'column', sm: 'row' }}
