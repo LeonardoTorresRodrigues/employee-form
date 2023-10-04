@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@mui/material';
-import { NumericFormat } from 'react-number-format';
+import { NumericFormat, NumberFormatValues } from 'react-number-format';
 
 interface SalaryInputProps {
 	value: number;
@@ -8,10 +8,14 @@ interface SalaryInputProps {
 }
 
 const SalaryInput: React.FC<SalaryInputProps> = ({ value, onChange }) => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handleSalaryChange = (values: any) => {
+	const handleSalaryChange = (values: NumberFormatValues) => {
 		const { floatValue } = values;
-		onChange(floatValue || 0);
+
+		if (floatValue !== undefined) {
+			onChange(floatValue);
+		} else {
+			onChange(0);
+		}
 	};
 
 	return (
