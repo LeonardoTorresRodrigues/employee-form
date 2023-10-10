@@ -6,51 +6,154 @@ import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/material/styles';
 import ProfilePicture from './ProfilePicture';
 import SalaryInput from './SalaryInput';
-import PhoneNumber from './PhoneNumber';
-import NameForm from './NameForm';
 import GenderForm from './GenderForm';
 import DatePickForm from './DatePickerForm';
-import InputWithValidationForm from './InputWithValidationForm';
-import AddressFieldForm from './AddressFieldForm';
+import { MuiTelInput } from 'mui-tel-input';
+
+interface IRegistration {
+	name: string,
+	lastname: string,
+	gender: string,
+	otherGender?: string,
+	birthday: Date,
+	admissionDate: Date,
+	address: string,
+	salary: number,
+	phone: string,
+	position: string,
+	sector: string,
+}
 
 export default function Form() {
 	const theme = useTheme();
 
-	// gender component
-	const [gender, setGender] = useState<string>('');
-	const [otherGenderValue, setOtherGenderValue] = useState<string>('');
+	const [name, setName] = useState<string>(''); // name value
+	const [lastname, setLastname] = useState<string>(''); // lastname value
+	const [gender, setGender] = useState<string>(''); // gender value
+	const [otherGenderValue, setOtherGenderValue] = useState<string>(''); // other gender value
+	const [birthday, setBirthday] = useState<Date>(); // birthday value
+	const [admissionDate, setAdmissionDate] = useState<Date>(); // adimission date value
+	const [address, setAddress] = useState<string>(''); // address value
+	const [salary, setSalary] = useState<number>(0); // salary value
+	const [phone, setPhone] = useState<string>(''); // phone number value
+	const [photo, setPhoto] = useState<File | null>(null); // photo value
+	const [position, setPosition] = useState<string>(''); // position value
+	const [sector, setSector] = useState<string>(''); // sector value
+	const [error, setError] = useState(''); // error for validation
 
-	const handleOtherGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	// Name
+	const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const inputValue = event.target.value;
 
-		if (/^[a-zA-ZÀ-ÿ\s]*$/.test(inputValue) && inputValue.length <= 25) {
-			setOtherGenderValue(inputValue);
+		if (/^[a-zA-Z]*$/.test(inputValue) && inputValue.length <= 50) {
+			setName(inputValue);
 		}
 	};
 
-	// date component
-	const [birthday, setBirthday] = useState<Date | null>(null);
-	const [admissionDate, setAdmissionDate] = useState<Date | null>(null);
+	// Last Name
+	const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
 
-	const handleBirthdayChange = (date: Date | null) => {
+		if (/^[a-zA-Z]*$/.test(inputValue) && inputValue.length <= 50) {
+			setLastname(inputValue);
+		}
+	};
+
+	// Other Gender
+	const handleOtherGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const otherGenderValue = event.target.value;
+
+		if (/^[a-zA-ZÀ-ÿ\s]*$/.test(otherGenderValue) && otherGenderValue.length <= 25) {
+			setOtherGenderValue(otherGenderValue);
+		}
+	};
+
+	// Birthday
+	const handleBirthdayChange = (date: Date) => {
 		setBirthday(date);
 	};
 
-	const handleAdmissionDateChange = (date: Date | null) => {
+	// Admission Date
+	const handleAdmissionDateChange = (date: Date) => {
 		setAdmissionDate(date);
 	};
 
-	// salary component
-	const [salary, setSalary] = useState<number>(0);
+	// Sector
+	const handleSectorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+		setSector(inputValue);
 
+		if (inputValue.trim() === '') {
+			setError('O campo é obrigatório.');
+		} else {
+			setError('');
+		}
+	};
+
+	// Position
+	const handlePositionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = event.target.value;
+		setPosition(inputValue);
+
+		if (inputValue.trim() === '') {
+			setError('O campo é obrigatório.');
+		} else {
+			setError('');
+		}
+	};
+
+	// Salary
 	const handleSalaryChange = (newSalary: number) => {
 		setSalary(newSalary);
 	};
 
-	// address component
-	const validateAddress = (address: string) => {
-		const addressRegex = /^[A-Za-z0-9\s.,#-]+$/;
-		return addressRegex.test(address);
+	// Address
+	const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const newAddress = event.target.value;
+		setAddress(newAddress);
+	};
+
+	// Phone
+
+	const maxNonEmptyDigits = 14;
+
+	const handlePhoneChange = (newPhone: string) => {
+		const phoneNumberWithoutSpaces = newPhone.replace(/\s/g, '');
+
+		if (phoneNumberWithoutSpaces.length <= maxNonEmptyDigits) {
+			setPhone(newPhone);
+		}
+	};
+
+	const handleEmployeeResgistration = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const user: IRegistration = {
+			name,
+			lastname,
+			gender,
+			otherGenderValue,
+			birthday,
+			admissionDate,
+			address,
+			phone,
+			position,
+			sector,
+			salary
+		};
+	};
+
+	const handleFormSubmit = () => {
+		console.log('Nome:', name);
+		console.log('SobreNome:', lastname);
+		console.log('Gênero:', gender);
+		console.log('Outro Gênero:', otherGenderValue);
+		console.log('Aniversario:', birthday);
+		console.log('Contratação:', admissionDate);
+		console.log('Endereço:', address);
+		console.log('Telefone:', phone);
+		console.log('Cargo:', position);
+		console.log('Setor:', sector);
+		console.log('Salário:', salary);
 	};
 
 	return (
@@ -72,7 +175,26 @@ export default function Form() {
 						>
 							Informações de Contato
 						</Typography>
-						<NameForm />
+
+						<TextField
+							required
+							label='Nome'
+							helperText='ex. Leonardo'
+							value={name}
+							onChange={handleNameChange}
+							fullWidth
+							variant='filled'
+						/>
+
+						<TextField
+							required
+							label='Sobrenome'
+							helperText='ex. Rodrigues'
+							value={lastname}
+							onChange={handleLastNameChange}
+							fullWidth
+							variant='filled'
+						/>
 						<Stack
 							direction={{ xs: 'column', lg: 'row' }}
 							spacing={'auto'}
@@ -98,9 +220,20 @@ export default function Form() {
 								onChange={handleBirthdayChange}
 							/>
 						</Stack>
-						<AddressFieldForm
-							validateAddress={validateAddress}
+
+						<TextField
+							required
+							label='Endereço'
+							helperText='ex. Avenida Paulista, 1.234 - São Paulo - SP - 07010 001'
+							value={address}
+							onChange={handleAddressChange}
+							error={Boolean(error)}
+							fullWidth
+							variant='filled'
 						/>
+						{/* <AddressFieldForm
+							validateAddress={validateAddress}
+						/> */}
 						<Stack
 							direction={{ xs: 'column', sm: 'row' }}
 							alignItems={{ xs: 'center', sm: 'flex-start' }}
@@ -108,7 +241,18 @@ export default function Form() {
 							spacing={{ xs: 2, sm: 4 }}
 							marginBottom={4}
 						>
-							<PhoneNumber />
+
+							<MuiTelInput
+								defaultCountry='BR'
+								value={phone}
+								onChange={handlePhoneChange}
+								required
+								label="Telefone"
+								helperText="(xx) xxxxx-xxxx"
+								fullWidth
+								variant='filled'
+							/>
+							{/* <PhoneNumber /> */}
 							<ProfilePicture />
 						</Stack>
 						<Stack spacing={2}>
@@ -125,18 +269,42 @@ export default function Form() {
 							>
 								Informações do Funcionário
 							</Typography>
-							<InputWithValidationForm
+
+							<TextField
+								required
 								label='Cargo'
+								value={position}
+								onChange={handlePositionChange}
+								error={Boolean(error)}
+								helperText={error}
+								fullWidth
+								variant='filled'
 							/>
+							{/* <InputWithValidationForm
+								label='Cargo'
+								value={position}
+							/> */}
 							<DatePickForm
 								label='Data de Admissão'
 								helperText='DD-MM-AAAA'
 								value={admissionDate}
 								onChange={handleAdmissionDateChange}
 							/>
-							<InputWithValidationForm
+
+							<TextField
+								required
 								label='Setor'
+								value={sector}
+								onChange={handleSectorChange}
+								error={Boolean(error)}
+								helperText={error}
+								fullWidth
+								variant='filled'
 							/>
+							{/* <InputWithValidationForm
+								label='Setor'
+								value={sector}
+							/> */}
 							<SalaryInput value={salary} onChange={handleSalaryChange} />
 						</Stack>
 						<Stack marginTop={2}>
@@ -147,6 +315,7 @@ export default function Form() {
 								variant='contained'
 								aria-label='cadastrar funcionário'
 								endIcon={<SendIcon />}
+								onClick={handleFormSubmit}
 							>
 								Cadastrar Funcionário
 							</Button>
